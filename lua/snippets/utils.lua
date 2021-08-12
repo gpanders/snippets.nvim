@@ -187,7 +187,7 @@ return {
 	match_comment_or_indentation = match_comment_or_indentation;
 	comment_and_indent = comment_and_indent;
 	into_snippet = into_snippet;
-	lowest_id = lowest_id;
+	lowest_variable_id = lowest_variable_id;
 	prefix_new_lines_with_function = prefix_new_lines_with_function;
 	iterate_variables_by_id = iterate_variables_by_id;
 
