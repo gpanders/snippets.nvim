@@ -147,13 +147,17 @@ local function force_comment(s)
 		-- Add an extra space to it.
 		return nvim.bo.commentstring:format(""):gsub("%S$", "%0 ")
 	end
-	local S = prefix_new_lines_with_function(s, get_comment_prefix)
+	local S = prefix_new_lines_with_function(s, get_comment_prefix, true)
+
+	local prefix
+	if get_line_comment() ~= "" then
+		prefix = ""
+	else
+		prefix = get_comment_prefix()
+	end
+
 	insert(S, 1, U.make_preorder_function_component(function()
-		local comment = get_line_comment()
-		if comment ~= "" then
-			return ""
-		end
-		return get_comment_prefix()
+		return prefix
 	end))
 	return S
 end
