@@ -41,8 +41,6 @@ local function get_line_comment()
 		local pattern = "^(%s*)"..
 		(U.find_sub(vim.pesc((U.find_sub(cms, "\0", "%s", 1, true))), "(%s*).*", "\0", 1, true))
 		local pre_ws, inner_ws = nvim_get_current_line():match(pattern)
-		print("pre_ws",pre_ws)
-		print("inner_ws",inner_ws)
 		if pre_ws then
 			return pre_ws..cms:format("")..inner_ws
 		end
