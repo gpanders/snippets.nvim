@@ -177,6 +177,13 @@ local function has_active_snippet()
 	return active_snippet ~= nil
 end
 
+local function cancel()
+	if active_snippet and active_snippet.cancel then
+		active_snippet.cancel()
+		active_snippet = nil
+	end
+end
+
 local example_keymap = {
 	["i<c-k>"] = {
 		"<cmd>lua require'snippets'.expand_or_advance()<CR>",
@@ -209,6 +216,7 @@ return setmetatable({
 	has_active_snippet = has_active_snippet;
 	lookup_snippet_at_cursor = lookup_snippet_at_cursor;
 	check_snippet = check_snippet;
+	cancel = cancel;
 
 	-- Alias
 	u = require 'snippets.utils';

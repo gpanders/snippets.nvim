@@ -100,6 +100,17 @@ local function entrypoint(structure)
 
   local R = { aborted = false, finished = false }
 
+  function R.cancel()
+    R.finished = true
+    S = evaluator.evaluate_structure(resolved_inputs)
+    for i, v in ipairs(evaluator.structure) do
+      if U.is_variable(v) then
+        set_extmark_text(bufnr, i, S[i])
+      end
+    end
+    cleanup(bufnr)
+  end
+
   function R.advance(offset)
     offset = offset or 1
     current_index = math.max(math.min(current_index + offset, #evaluator.inputs + 1), 0)
