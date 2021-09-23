@@ -101,6 +101,16 @@ local function lookup_snippet_at_cursor(pattern)
 	return word, lookup_snippet(ft, word)
 end
 
+-- Returns true if snippet expansion would occur if called
+local function check_snippet()
+	if active_snippet then
+		return true
+	end
+
+	local _, snippet = lookup_snippet_at_cursor()
+	return snippet ~= nil
+end
+
 -- TODO(ashkan): if someone undos, the active_snippet has to be erased...?
 -- Only one of pattern or expected_word should be specified.
 --   expected_word will be used if present (even if pattern is passed).
@@ -198,6 +208,7 @@ return setmetatable({
 	lookup_snippet = lookup_snippet;
 	has_active_snippet = has_active_snippet;
 	lookup_snippet_at_cursor = lookup_snippet_at_cursor;
+	check_snippet = check_snippet;
 
 	-- Alias
 	u = require 'snippets.utils';
